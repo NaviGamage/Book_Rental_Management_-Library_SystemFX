@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="407.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginPageController">
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/img.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="txtEmail" layoutX="70.0" layoutY="189.0" prefHeight="21.0" prefWidth="156.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtPassword" layoutX="69.0" layoutY="231.0" prefHeight="21.0" prefWidth="156.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </JFXPasswordField>
+      <Label layoutX="59.0" layoutY="175.0" text="Emaill">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="59.0" layoutY="218.0" text="Password">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnLogin" layoutX="97.0" layoutY="268.0" onAction="#btnLoginOnAction" prefHeight="0.0" prefWidth="84.0" stylesheets="@../StyleCSS/LoginBackground.css" text="Login" textFill="#171717">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
