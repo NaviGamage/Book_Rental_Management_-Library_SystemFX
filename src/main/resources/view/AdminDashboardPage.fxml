@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.AdminDashboardPageController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="485.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboardPageController">
+   <children>
+      <ImageView fitHeight="485.0" fitWidth="700.0" layoutX="21.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-fit-height: 600; -fx-fit-width: 700;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../img/AdminDashboard.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnDashboard" layoutX="25.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnDashboardOnAction" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: E8A89B;" text="Dashboard">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBook" layoutX="25.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnBookOnAction" prefHeight="25.0" prefWidth="132.0" text="Books">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCustomer" layoutX="25.0" layoutY="257.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="25.0" prefWidth="132.0" text="Customer">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRentalBooks" layoutX="25.0" layoutY="318.0" mnemonicParsing="false" onAction="#btnRentalBooksOnAction" prefHeight="25.0" prefWidth="132.0" text="Rental Books">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRetunrBooks" layoutX="25.0" layoutY="376.0" mnemonicParsing="false" onAction="#btnRetunrBooksOnAction" prefHeight="25.0" prefWidth="132.0" text="Retunr Books">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="420.0" layoutY="139.0" prefHeight="27.0" prefWidth="132.0" text="Total Customer">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="269.0" prefHeight="27.0" prefWidth="132.0" text="Total Books">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblToatalCustomer" layoutX="461.0" layoutY="165.0" text="0">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblToatalBooks" layoutX="461.0" layoutY="299.0" text="0">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
