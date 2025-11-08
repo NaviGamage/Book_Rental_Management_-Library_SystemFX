@@ -7,9 +7,13 @@ public interface CustomerPageRepository {
 
     ResultSet getAllCustomers()throws SQLException;
 
-    void addCustomer(String custID,String name,String phone,String email,String address);
+    ResultSet getSearchedCustomers(String Cust_ID) throws SQLException;
 
-    void deleteCustomer(String custID);
+    void addCustomer(String Cust_ID,String Name,String Phone,String Email,String Address);
 
-    void updateCustomer(String custID,String name,String phone,String email,String address);
+    void deleteCustomer(String Cust_ID);
+
+    void updateCustomer(String Cust_ID, String Name, String Phone, String Email, String Address);
+
+
 }
