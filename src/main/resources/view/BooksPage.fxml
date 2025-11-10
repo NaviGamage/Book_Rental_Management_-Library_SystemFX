@@ -71,7 +71,7 @@
             <Font size="10.0" />
          </font>
       </JFXTextField>
-      <Label layoutX="515.0" layoutY="183.0" text="Book ISBM :">
+      <Label layoutX="515.0" layoutY="183.0" text="Book ISBN :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
