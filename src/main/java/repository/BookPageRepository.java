@@ -7,12 +7,12 @@ public interface BookPageRepository {
 
     ResultSet getAllbooks() throws SQLException;
 
-    ResultSet getSearchedCustomers(int id) throws SQLException;
+    ResultSet getSearchBooks(int id) throws SQLException;
 
-    void addBook(int id, String isbm,String name,String author,String category,int quantity);
+    void addBooks(int id, String isbn,String name,String author,String category,int quantity);
 
-    void deleteBook(int id);
+    void deleteBooks(int id);
 
-    void updateBook(int id,String isbm, String name,String author,String category,int quantity);
+    void updateBooks(int id, String isbn, String name, String author, String category, int quantity);
 
 }

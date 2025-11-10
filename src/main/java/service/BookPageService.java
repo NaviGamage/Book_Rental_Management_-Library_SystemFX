@@ -11,10 +11,10 @@ public interface BookPageService {
 
     ObservableList<Books>getSearchBooks(int id)throws SQLException;
 
-    void addBook(int id,String isbm,String name,String author,String category,int quantity );
+    void addBooks(int id,String isbm,String name,String author,String category,int quantity );
 
-    void deleteBook(int id);
+    void deleteBooks(int id);
 
-    void updateBook(int id,String isbm,String name,String author,String category,int quantity);
+    void updateBooks(int id, String isbm, String name, String author, String category, int quantity);
 }
 

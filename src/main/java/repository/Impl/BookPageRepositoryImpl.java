@@ -12,14 +12,14 @@ public class BookPageRepositoryImpl implements BookPageRepository {
     @Override
     public ResultSet getAllbooks() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement("SELECT * From book");
+        PreparedStatement pstm = connection.prepareStatement("SELECT * From books");
         ResultSet resultSet = pstm.executeQuery();
         return resultSet;
     }
 
     @Override
-    public ResultSet getSearchedCustomers(int id) throws SQLException {
-        String SQL = "SELECT * FROM book WHERE id=?";
+    public ResultSet getSearchBooks(int id) throws SQLException {
+        String SQL = "SELECT * FROM books WHERE id=?";
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(SQL);
         pstm.setObject(1,id);
@@ -28,12 +28,12 @@ public class BookPageRepositoryImpl implements BookPageRepository {
     }
 
     @Override
-    public void addBook(int id, String isbm,String name, String author, String category, int quantity) {
+    public void addBooks(int id, String isbn,String name, String author, String category, int quantity) {
         try {
             Connection connection =DBConnection.getInstance().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("INSERT INTO book( id, isbm, name, author, category,  quantity) VALUES(?,?,?,?,?,?)");
+            PreparedStatement pstm = connection.prepareStatement("INSERT INTO books( id, isbn, name, author, category,  quantity) VALUES(?,?,?,?,?,?)");
             pstm.setObject(1,id);
-            pstm.setObject(2,isbm);
+            pstm.setObject(2,isbn);
             pstm.setObject(3,name);
             pstm.setObject(4,author);
             pstm.setObject(5,category);
@@ -47,10 +47,10 @@ public class BookPageRepositoryImpl implements BookPageRepository {
     }
 
     @Override
-    public void deleteBook(int id) {
+    public void deleteBooks(int id) {
         try {
             Connection connection =DBConnection.getInstance().getConnection();
-            PreparedStatement pstm= connection.prepareStatement("DELETE FROM book WHERE id=?");
+            PreparedStatement pstm= connection.prepareStatement("DELETE FROM books WHERE id=?");
             pstm.setObject(1,id);
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -60,13 +60,13 @@ public class BookPageRepositoryImpl implements BookPageRepository {
     }
 
     @Override
-    public void updateBook(int id, String isbm, String name, String author, String category, int quantity) {
+    public void updateBooks(int id, String isbn, String name, String author, String category, int quantity) {
 
         try {
             Connection connection =DBConnection.getInstance().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("UPDATE book SET id=?,isbm=?, name=?, author=?, category=?, quantity=? WHERE id=?");
+            PreparedStatement pstm = connection.prepareStatement("UPDATE books SET id=?,isbn=?, name=?, author=?, category=?, quantity=? WHERE id=?");
             pstm.setObject(1,id);
-            pstm.setObject(2,isbm);
+            pstm.setObject(2,isbn);
             pstm.setObject(3,name);
             pstm.setObject(4,author);
             pstm.setObject(5,category);

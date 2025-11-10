@@ -3,13 +3,9 @@ package service.Impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.dto.Books;
-import repository.BookPageRepository;
-import repository.CustomerPageRepository;
 import repository.Impl.BookPageRepositoryImpl;
-import repository.Impl.CustomerPageRepositoryImpl;
 import service.BookPageService;
 
-import java.awt.print.Book;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -24,7 +20,7 @@ public class BookPageServiceImpl implements BookPageService {
         while (resultSet.next()){
             books.add(new Books(
                     resultSet.getInt("id"),
-                    resultSet.getString("isbm"),
+                    resultSet.getString("isbn"),
                     resultSet.getString("name"),
                     resultSet.getString("author"),
                     resultSet.getString("category"),
@@ -40,7 +36,7 @@ public class BookPageServiceImpl implements BookPageService {
         while (resultSet.next()){
             books.add(new Books(
                     resultSet.getInt("id"),
-                    resultSet.getString("isbm"),
+                    resultSet.getString("isbn"),
                     resultSet.getString("name"),
                     resultSet.getString("author"),
                     resultSet.getString("category"),
@@ -54,19 +50,19 @@ public class BookPageServiceImpl implements BookPageService {
     }
 
     @Override
-    public void addBook(int id, String isbm, String name, String author, String category, int quantity) {
-        bookPageRepository.addBook(id, isbm, name, author, category, quantity);
+    public void addBooks(int id, String isbn, String name, String author, String category, int quantity) {
+        bookPageRepository.addBooks(id, isbn, name, author, category, quantity);
     }
 
     @Override
-    public void deleteBook(int id) {
-        bookPageRepository.deleteBook(id);
+    public void deleteBooks(int id) {
+        bookPageRepository.deleteBooks(id);
 
     }
 
     @Override
-    public void updateBook(int id, String isbm, String name, String author, String category, int quantity) {
-        bookPageRepository.updateBook(id, isbm, name, author, category, quantity);
+    public void updateBooks(int id, String isbn, String name, String author, String category, int quantity) {
+        bookPageRepository.updateBooks(id, isbn, name, author, category, quantity);
 
     }
 }
