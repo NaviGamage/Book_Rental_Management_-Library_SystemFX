@@ -15,4 +15,5 @@ public interface BookPageRepository {
 
     void updateBooks(int id, String isbn, String name, String author, String category, int quantity);
 
+    boolean updateBooksqty(int quantity, int id);
 }

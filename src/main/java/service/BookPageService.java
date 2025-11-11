@@ -15,6 +15,8 @@ public interface BookPageService {
 
     void deleteBooks(int id);
 
-    void updateBooks(int id, String isbm, String name, String author, String category, int quantity);
+    boolean updateBooks(int id, String isbm, String name, String author, String category, int quantity);
+
+    boolean updateBooksqty(int quantity, int id);
 }
 

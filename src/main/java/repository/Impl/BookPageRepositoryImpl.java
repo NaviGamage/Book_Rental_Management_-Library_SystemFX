@@ -77,4 +77,17 @@ public class BookPageRepositoryImpl implements BookPageRepository {
         }
 
     }
+
+    @Override
+    public boolean updateBooksqty(int quantity, int id) {
+        try {
+            Connection connection=DBConnection.getInstance().getConnection();
+            PreparedStatement pstm =connection.prepareStatement("UPDATE book SET quantity = quantity + ? WHERE id = ?");
+            pstm.setObject(1,quantity);
+            pstm.setObject(2,id);
+            return pstm.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
