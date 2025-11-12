@@ -125,6 +125,7 @@ public class CustomerPageController implements Initializable {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
+        clearCustomer();
 
 
 
@@ -140,6 +141,7 @@ public class CustomerPageController implements Initializable {
     void btnDashboardOnAction(ActionEvent event) {
         try {
             DashboardPage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashboardPage.fxml"))));
+            DashboardPage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
