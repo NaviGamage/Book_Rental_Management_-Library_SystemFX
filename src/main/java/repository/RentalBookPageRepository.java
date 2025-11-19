@@ -14,4 +14,6 @@ public interface RentalBookPageRepository {
     void updateRentalBooks(int Rental_ID, int id, String Cust_ID, String Rental_Date, String Due_Date, int quantity);
 
     ResultSet searchRental(int Rental_ID);
+
+    boolean returnRental(int Rental_ID );
 }

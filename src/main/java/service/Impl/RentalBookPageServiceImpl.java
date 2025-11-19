@@ -72,6 +72,9 @@ public class RentalBookPageServiceImpl implements RentalBookPageService {
                     connection.commit();
                 }
 
+                if (isUpdated) {
+                }
+
             }
         } catch (SQLException e) {
             connection.rollback();
@@ -92,4 +95,12 @@ public class RentalBookPageServiceImpl implements RentalBookPageService {
         rentalBookPageRepository.updateRentalBooks(Rental_ID,id,Cust_ID,Rental_Date,Due_Date,quantity);
 
     }
+
+    @Override
+    public boolean returnRental(int Rental_ID) {
+            boolean isDeleted = rentalBookPageRepository.returnRental(Integer.parseInt(String.valueOf(Rental_ID)));
+            System.out.println("Return OK: " + isDeleted);
+            return isDeleted;
+        }
 }
+

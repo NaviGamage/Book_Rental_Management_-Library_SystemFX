@@ -16,17 +16,17 @@ public class RentalBookPageRepositoryImpl implements RentalBookPageRepository {
     }
 
     @Override
-    public boolean addRentalBooks(int rentalID, int bookID, String customerID, String rentalDate, String dueDate, int quantity) {
+    public boolean addRentalBooks(int Rental_ID, int id, String Cust_ID, String Rental_Date, String Due_Date, int quantity) {
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO rentalbooks (Rental_ID, id, Cust_ID, Rental_Date, Due_Date, quantity) VALUES (?,?,?,?,?,?)");
 
-            pstm.setInt(1, rentalID);
-            pstm.setInt(2, bookID);
-            pstm.setString(3, customerID);
-            pstm.setString(4, rentalDate);
-            pstm.setString(5, dueDate);
+            pstm.setInt(1, Rental_ID);
+            pstm.setInt(2, id);
+            pstm.setString(3, Cust_ID);
+            pstm.setString(4, Rental_Date);
+            pstm.setString(5, Due_Date);
             pstm.setInt(6, quantity);
 
             return pstm.executeUpdate() > 0;
@@ -74,11 +74,25 @@ public class RentalBookPageRepositoryImpl implements RentalBookPageRepository {
     @Override
     public ResultSet searchRental(int Rental_ID) {
         try {
-            Connection connection =DBConnection.getInstance().getConnection();
+            Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM rentalbooks WHERE Rental_ID=?");
-            pstm.setObject(1,Rental_ID);
+            pstm.setObject(1, Rental_ID);
             ResultSet resultSet = pstm.executeQuery();
-            return resultSet;
+            return  resultSet;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public boolean returnRental(int Rental_ID) {
+        try {
+            Connection connection =DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement("DELETE FROM rentalbooks WHERE Rental_ID=?");
+            pstm.setObject(1,Rental_ID);
+            return pstm.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

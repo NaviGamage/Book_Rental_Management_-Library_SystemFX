@@ -6,16 +6,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.dto.RentalBook;
 import service.Impl.RentalBookPageServiceImpl;
 import service.RentalBookPageService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
@@ -118,10 +122,16 @@ public class RentalBooksController implements Initializable {
 
 
 
+    Stage BookPageStage = new Stage();
     @FXML
     void btnBookOnAction(ActionEvent event) {
-
-
+        try {
+            BookPageStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/BooksPage.fxml"))));
+            BookPageStage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BookPageStage.show();
 
     }
 
@@ -132,16 +142,28 @@ public class RentalBooksController implements Initializable {
 
     }
 
+    Stage CustomerPageStage = new Stage();
     @FXML
     void btnCustomerOnAction(ActionEvent event) {
-
+        try {
+            CustomerPageStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerPage.fxml"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        CustomerPageStage.show();
     }
 
+    Stage DashboardPage = new Stage();
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
-
+        try {
+            DashboardPage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashboardPage.fxml"))));
+            DashboardPage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        DashboardPage.show();
     }
-
     @FXML
     void btnDeleteRentalBookOnAction(ActionEvent event) throws SQLException {
 
@@ -157,8 +179,17 @@ public class RentalBooksController implements Initializable {
 
     }
 
+    Stage ReturnBooksStage = new Stage();
     @FXML
     void btnRetunrBooksOnAction(ActionEvent event) {
+
+        try {
+            ReturnBooksStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReturnBooksPage.fxml"))));
+            ReturnBooksStage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ReturnBooksStage.show();
 
     }
 
