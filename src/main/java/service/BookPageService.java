@@ -18,5 +18,7 @@ public interface BookPageService {
     void updateBooks(int id, String isbm, String name, String author, String category, int quantity);
 
     boolean updateBooksqty(int quantity, int id);
+
+    boolean addedBookQty(int quantity,int id) throws SQLException;
 }
 

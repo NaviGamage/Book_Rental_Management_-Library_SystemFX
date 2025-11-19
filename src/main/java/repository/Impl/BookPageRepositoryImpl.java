@@ -1,5 +1,6 @@
 package repository.Impl;
 
+import com.mysql.cj.exceptions.ConnectionIsClosedException;
 import db.DBConnection;
 import repository.BookPageRepository;
 
@@ -92,6 +93,15 @@ public class BookPageRepositoryImpl implements BookPageRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean addedBookQty(int quantity, int id) throws SQLException {
+        Connection connection =DBConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("UPDATE books SET  quantity= quantity + ? WHERE id = ?");
+        pstm.setObject(1,quantity);
+        pstm.setObject(2,id);
+        return pstm.executeUpdate() > 0;
     }
 }
 

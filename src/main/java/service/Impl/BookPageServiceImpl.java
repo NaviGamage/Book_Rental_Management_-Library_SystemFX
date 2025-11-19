@@ -3,6 +3,7 @@ package service.Impl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.dto.Books;
+import repository.BookPageRepository;
 import repository.Impl.BookPageRepositoryImpl;
 import service.BookPageService;
 
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 public class BookPageServiceImpl implements BookPageService {
 
     ObservableList<Books> books = FXCollections.observableArrayList();
-    BookPageRepositoryImpl bookPageRepository = new BookPageRepositoryImpl();
+    BookPageRepository bookPageRepository = new BookPageRepositoryImpl();
 
     @Override
     public ObservableList<Books> getAllBooks() throws SQLException {
@@ -69,5 +70,11 @@ public class BookPageServiceImpl implements BookPageService {
     public boolean updateBooksqty(int quantity, int id) {
         boolean isAdded = bookPageRepository.updateBooksqty(quantity,id);
         return isAdded;
+    }
+
+    @Override
+    public boolean addedBookQty(int quantity, int id) throws SQLException {
+        boolean isADDQty = bookPageRepository.addedBookQty(quantity,id);
+        return isADDQty;
     }
 }
