@@ -46,14 +46,12 @@
       </Button>
       <TableView fx:id="tblReturnBook" layoutX="239.0" layoutY="107.0" prefHeight="462.0" prefWidth="547.0">
          <columns>
-            <TableColumn fx:id="colRentalID" prefWidth="62.4000244140625" text="Rental_ID" />
-            <TableColumn fx:id="colBookID" prefWidth="51.20001220703125" text="Book_ID" />
-            <TableColumn fx:id="colCustID" prefWidth="63.0" text="Cust_ID" />
-            <TableColumn fx:id="colRentalDate" prefWidth="82.0" text="Rental_Date" />
-            <TableColumn fx:id="colDueDate" prefWidth="83.0" text="Due_Date" />
-            <TableColumn fx:id="colQuantity" prefWidth="72.0" text="Quantity" />
-            <TableColumn fx:id="colReturnDate" text="Return Date" />
-            <TableColumn fx:id="colfine" prefWidth="52.0" text="Fines" />
+            <TableColumn fx:id="colRentalID" prefWidth="78.0" text="Rental_ID" />
+            <TableColumn fx:id="colBookID" prefWidth="71.0" text="Book_ID" />
+            <TableColumn fx:id="colCustID" prefWidth="85.0" text="Cust_ID" />
+            <TableColumn fx:id="colRentalDate" prefWidth="128.0" text="Rental_Date" />
+            <TableColumn fx:id="colDueDate" prefWidth="96.0" text="Due_Date" />
+            <TableColumn fx:id="colQuantity" prefWidth="88.0" text="Quantity" />
          </columns>
       </TableView>
       <Label layoutX="884.0" layoutY="139.0" text="Return Details">

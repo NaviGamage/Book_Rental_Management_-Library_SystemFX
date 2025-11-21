@@ -36,9 +36,9 @@ public class AdminDashboardPageController {
     Stage BookPageStage = new Stage();
     @FXML
     void btnBookOnAction(ActionEvent event) {
-
         try {
             BookPageStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/BooksPage.fxml"))));
+            BookPageStage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -48,18 +48,25 @@ public class AdminDashboardPageController {
     Stage CustomerPageStage = new Stage();
     @FXML
     void btnCustomerOnAction(ActionEvent event) {
-
         try {
             CustomerPageStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerPage.fxml"))));
+            CustomerPageStage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         CustomerPageStage.show();
     }
 
-
+    Stage DashboardPageStage = new Stage();
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
+        try {
+            DashboardPageStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/AdminDashboardPage.fxml.fxml"))));
+            DashboardPageStage.setResizable(false);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
@@ -68,6 +75,7 @@ public class AdminDashboardPageController {
     void btnRentalBooksOnAction(ActionEvent event) {
         try {
             RentalBooksStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/RentalBooksPage.fxml"))));
+            RentalBooksStage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -79,11 +87,12 @@ public class AdminDashboardPageController {
     void btnRetunrBooksOnAction(ActionEvent event) {
 
         try {
-            RentalBooksStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReturnBooksPage.fxml"))));
+            ReturnBooksStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/ReturnBooksPage.fxml"))));
+            ReturnBooksStage.setResizable(false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        RentalBooksStage.show();
+        ReturnBooksStage.show();
 
     }
 

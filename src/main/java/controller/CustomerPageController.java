@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.dto.Customer;
@@ -21,6 +18,7 @@ import service.Impl.CustomerPageServiceImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CustomerPageController implements Initializable {
@@ -97,12 +95,18 @@ public class CustomerPageController implements Initializable {
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) throws SQLException {
 
+        if(!showConfirmationDialog("Add Customer", "Are you sure you want to add this customer?")) {
+            return;
+        }
+
         String Cust_ID = txtCustomerID.getText();
         String Name = txtCustomerName.getText();
         String Phone = txtPhoneNumber.getText();
         String Email = txtEmail.getText();
         String Address = txtAddress.getText();
         customerPageService.addCustomer(Cust_ID, Name ,Phone ,Email,Address);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Customer added successfully!");
 
         getAllCustomer();
         clearCustomer();
@@ -191,12 +195,18 @@ public class CustomerPageController implements Initializable {
     @FXML
     void btnUpdateCustomerOnAction(ActionEvent event) throws SQLException {
 
+        if (!showConfirmationDialog("Update Customer", "Are you sure you want to update this customer?")) {
+            return;
+        }
+
         String Cust_ID = txtCustomerID.getText();
         String Name    = txtCustomerName.getText();
         String Phone   = txtPhoneNumber.getText();
         String Email   = txtEmail.getText();
         String Address = txtAddress.getText();
         customerPageService.updateCustomer(Cust_ID, Name, Phone, Email, Address);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Customer updated successfully!");
 
         getAllCustomer();
         clearCustomer();
@@ -251,5 +261,23 @@ public class CustomerPageController implements Initializable {
         txtPhoneNumber.setText(null);
         txtEmail.setText(null);
         txtAddress.setText(null);
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean showConfirmationDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }

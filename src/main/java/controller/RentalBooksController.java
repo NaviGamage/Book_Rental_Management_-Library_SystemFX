@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.dto.RentalBook;
@@ -23,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class RentalBooksController implements Initializable {
@@ -106,12 +104,18 @@ public class RentalBooksController implements Initializable {
     @FXML
     void btnAddRentalBookOnAction(ActionEvent event) throws SQLException {
 
+        if (!showConfirmationDialog("Add Rental", "Are you sure you want to add this rental record?")) {
+            return;
+        }
+
         int Rental_ID = Integer.parseInt(txtRentalID.getText());
         int id = Integer.parseInt(txtBookIID.getText());
         String Cust_ID =txtCustID.getText();
         String Rental_Date = txtRentalDate.getText();
         String Due_Date = txtDueDate.getText();
         int quantity = Integer.parseInt(txtQuantity.getText());
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Rental record added successfully!");
 
         rentalBookPageService.addRentalBooks(Rental_ID,id,Cust_ID,Rental_Date,Due_Date,quantity);
         rentalBooks.clear();
@@ -167,6 +171,10 @@ public class RentalBooksController implements Initializable {
     @FXML
     void btnDeleteRentalBookOnAction(ActionEvent event) throws SQLException {
 
+        if (!showConfirmationDialog("Delete Rental Book Details", "Are you sure you want to delete this book details?")) {
+            return;
+        }
+
         int Rental_ID = Integer.parseInt(txtRentalID.getText());
         rentalBookPageService.deleteRental(Integer.parseInt(String.valueOf(Rental_ID)));
         clearRentalBooks();
@@ -204,6 +212,10 @@ public class RentalBooksController implements Initializable {
     @FXML
     void btnUpdateRentalBookOnAction(ActionEvent event) throws SQLException {
 
+        if (!showConfirmationDialog("Update Rental", "Are you sure you want to update this rental record?")) {
+            return;
+        }
+
         int Rental_ID = Integer.parseInt(txtRentalID.getText());
         int id = Integer.parseInt(txtBookIID.getText());
         String Cust_ID =txtCustID.getText();
@@ -212,6 +224,8 @@ public class RentalBooksController implements Initializable {
         int quantity = Integer.parseInt(txtQuantity.getText());
 
         rentalBookPageService.updateRentalBooks(Rental_ID,id,Cust_ID,Rental_Date,Due_Date,quantity);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Rental record updated successfully!");
         clearRentalBooks();
         getAllRentalBooks();
 
@@ -273,5 +287,23 @@ public class RentalBooksController implements Initializable {
         txtRentalDate.setText(null);
         txtDueDate.setText(null);
         txtQuantity.setText(null);
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean showConfirmationDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }

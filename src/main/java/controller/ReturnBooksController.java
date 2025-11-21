@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.dto.RentalBook;
@@ -28,17 +25,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ReturnBooksController implements Initializable {
 
-    ObservableList<ReturnBook>returnBooks = FXCollections.observableArrayList();
     ReturnBookPageService returnBookPageService = new ReturnBookPageServiceImpl();
     BookPageService bookPageService = new BookPageServiceImpl();
     ObservableList<RentalBook> rentalBooks = FXCollections.observableArrayList();
-    RentalBookPageService rentalBookPageService = new RentalBookPageServiceImpl();
+
 
 
     @FXML
@@ -87,12 +84,6 @@ public class ReturnBooksController implements Initializable {
     private TableColumn<?, ?> colRentalID;
 
     @FXML
-    private TableColumn<?, ?> colReturnDate;
-
-    @FXML
-    private TableColumn<?, ?> colfine;
-
-    @FXML
     private TableView<RentalBook> tblReturnBook;
 
     @FXML
@@ -104,8 +95,6 @@ public class ReturnBooksController implements Initializable {
     @FXML
     private JFXTextField txtDueDate;
 
-    @FXML
-    private JFXTextField txtFines;
 
     @FXML
     private JFXTextField txtQuantity;
@@ -126,6 +115,7 @@ public class ReturnBooksController implements Initializable {
     @FXML
     void btnAddReturnBookOnAction(ActionEvent event) throws SQLException {
 
+
         int Rental_ID = Integer.parseInt(txtRentalID.getText());
         int id = Integer.parseInt(txtBookIID.getText());
         String Cust_ID = txtCustID.getText();
@@ -134,8 +124,11 @@ public class ReturnBooksController implements Initializable {
         int quantity = Integer.parseInt(txtQuantity.getText());
         String Return_Date = txtReturDate.getText();
 
-        // Auto fine calculation
+
         double fine = calculateFine(Due_Date, Return_Date);
+        if (!showConfirmation("Confirm Return", "Are you sure you want to process this return?\nFine Amount: $" + fine)) {
+            return;
+        }
 
         returnBookPageService.setReturn(Rental_ID, id, Cust_ID, Rental_Date, Due_Date, quantity,Return_Date,fine);
 
@@ -237,8 +230,7 @@ public class ReturnBooksController implements Initializable {
         colRentalDate.setCellValueFactory(new PropertyValueFactory<>("Rental_Date"));
         colDueDate.setCellValueFactory(new PropertyValueFactory<>("Due_Date"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        colReturnDate.setCellValueFactory(new PropertyValueFactory<>("Return_Date"));
-        colfine.setCellValueFactory( new PropertyValueFactory<>("fine"));
+
 
         try {
             getAllReturnBooks();
@@ -297,9 +289,22 @@ public class ReturnBooksController implements Initializable {
 
         if (overdueDays <= 0) return 0;
 
-        return overdueDays * 50;  // 50 rupees per day
+        return overdueDays * 50;
     }
 
 
 
+    private boolean showConfirmation(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
 }
+
+
+
+

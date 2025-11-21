@@ -1,6 +1,5 @@
 package repository.Impl;
 
-import com.mysql.cj.exceptions.ConnectionIsClosedException;
 import db.DBConnection;
 import repository.BookPageRepository;
 

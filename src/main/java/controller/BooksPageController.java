@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.dto.Books;
@@ -23,6 +20,7 @@ import service.Impl.BookPageServiceImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class BooksPageController implements Initializable {
@@ -107,6 +105,12 @@ public class BooksPageController implements Initializable {
     @FXML
     void btnAddBookOnAction(ActionEvent event) throws SQLException {
 
+
+
+        if (!showConfirmationDialog("Add Book", "Are you sure you want to add this book?")) {
+            return;
+        }
+
         int id = Integer.parseInt(txtBookID.getText());
         String isbm=txtISBM.getText();
         String name=txtBookName.getText();
@@ -114,6 +118,8 @@ public class BooksPageController implements Initializable {
         String category =txtCategory.getText();
         int quantity =Integer.parseInt(txtQuntity.getText());
         bookPageService.addBooks(id,isbm,name,author,category,quantity);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Book added successfully!");
 
         getAllBooks();
         clearBook();
@@ -165,6 +171,9 @@ public class BooksPageController implements Initializable {
         int id = Integer.parseInt(txtBookID.getText());
         bookPageService.deleteBooks(id);
 
+        if (!showConfirmationDialog("Delete Book", "Are you sure you want to delete this book?")) {
+            return;
+        }
         getAllBooks();
         clearBook();
 
@@ -206,6 +215,10 @@ public class BooksPageController implements Initializable {
     @FXML
     void btnUpdateBookOnAction(ActionEvent event) throws SQLException {
 
+        if (!showConfirmationDialog("Update Book", "Are you sure you want to update this book?")) {
+            return;
+        }
+
         int id = Integer.parseInt(txtBookID.getText());
         String isbn=txtISBM.getText();
         String name=txtBookName.getText();
@@ -213,6 +226,8 @@ public class BooksPageController implements Initializable {
         String category =txtCategory.getText();
         int quantity =Integer.parseInt(txtQuntity.getText());
         bookPageService.updateBooks(id,isbn,name,author,category,quantity);
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Book updated successfully!");
 
         getAllBooks();
         clearBook();
@@ -270,6 +285,25 @@ public class BooksPageController implements Initializable {
         txtAuthor.setText(null);
         txtCategory.setText(null);
         txtQuntity.setText(null);
+    }
+
+    // Utility Methods
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean showConfirmationDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
 }
 
