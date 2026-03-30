@@ -17,7 +17,7 @@ public class LoginServiceImpl implements LoginService {
 
         if (resultSet.next()) {
             String dbEmail = resultSet.getString("email");
-            String dbPassword = resultSet.getString("password_hash"); // Use password_hash column
+            String dbPassword = resultSet.getString("password_hash");
             String dbRole = resultSet.getString("role");
 
             if (email.equals(dbEmail) && password.equals(dbPassword)) {
